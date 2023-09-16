@@ -20,8 +20,10 @@ impl Config {
         let msg_help = "
 Usage:
         
-
 echo   Print message console
+ls     File List
+find   Check if a file exists
+read   Read the content of a file
         
 ";
         println!("{}", msg_help);
