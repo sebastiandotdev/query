@@ -1,10 +1,12 @@
 mod config;
+mod run;
+
 
 use colored::*;
 use std::env;
 use std::process;
 use config::Config;
-
+use run::run;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -14,13 +16,5 @@ fn main() {
         process::exit(1);
     });
 
-    run(config);
-    
-}
-
-
-fn run(config: Config) {
-    if config.query == "echo" {
-        println!("{}", config.value);
-    }
+    run(config);  
 }
