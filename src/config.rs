@@ -16,6 +16,7 @@ impl Config {
 
         Ok(Config { query, value })
     }
+
     pub fn help() -> &'static str {
         let msg_help = "
 Usage:
