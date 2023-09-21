@@ -11,6 +11,9 @@ pub fn run(config: Config) {
     if config.query == "ls" {
         read_folder(&config);
     }
+    if config.query == "find" {
+        find_file(&config);
+    }
 }
 
 fn list_file(config: &Config) {
@@ -29,5 +32,15 @@ fn read_folder(config: &Config) {
         if entry_path.is_dir() {
             println!("{:?}", entry_path);
         }
+    }
+}
+
+fn find_file(config: &Config) {
+    let file = fs::metadata(&config.value).is_ok();
+
+    if file {
+        println!("El archivo existe: {}", config.value);
+    } else {
+        println!("El archivo no existe: {}", config.value);
     }
 }
