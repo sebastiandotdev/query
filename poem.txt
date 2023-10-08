@@ -1,2 +1,0 @@
-poema de rust
-esta funcionalidad espara el comando ls
