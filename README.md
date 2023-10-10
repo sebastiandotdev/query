@@ -1,4 +1,4 @@
-# Welcome to the Terminal, Console and Command-Line repo
+# Welcome to the Terminal
 
 This repository contains the source code for:
 
