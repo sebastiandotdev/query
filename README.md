@@ -4,6 +4,5 @@ This repository contains the source code for:
 
 ## About us
 
-Why terminal: 
-
+**Why terminal?** 
 terminal is incridible build in rust, super fast and secure
