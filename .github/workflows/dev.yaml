@@ -16,7 +16,15 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      - name: Run build
-        run: cargo build --verbose
+
+      # - name: Run formatter
       - name: Run fmt
         run: cargo fmt --all -- --check
+      
+      # - name: Run Linter
+      - name: Run clippy
+        run: cargo clippy --all -- -D warnings
+
+      # - name: Run Build
+      - name: Run build
+        run: cargo build --verbose
