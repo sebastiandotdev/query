@@ -1,3 +1,4 @@
-# terminal
+# Welcome to the Terminal, Console and Command-Line repo
 
-Terminal is a cli with a fast and efficient basic shell command written in rust. Complies with efficiency, speed 🎉
+This repository contains the source code for:
+
