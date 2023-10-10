@@ -1,0 +1,21 @@
+
+# Root
+*.rs text
+
+docs/** text
+
+# Setup for Cargo.lock
+Cargo.lock -diff -merge -text
+
+# Setup for Cargo.toml
+Cargo.toml -diff -merge -text
+
+# Setup for .Toml
+*.toml -diff -merge -text
+
+# Setup for rustfmt
+.rustfmt.toml -diff -merge -text
+
+# Setup Binary
+*.png binary
+target/* binary
