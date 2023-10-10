@@ -2,3 +2,8 @@
 name = "terminal"
 version = "0.0.0"
 edition = "2021"
+
+
+[[bin]]
+name = "terminal"
+path = "bin/main.rs"
