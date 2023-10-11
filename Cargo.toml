@@ -13,7 +13,7 @@ path = "bin/main.rs"
 
 [[test]]
 name = "test"
-path = "test/mod.rs"
+path = "test/test.rs"
 
 [dependencies]
 reqwest = "0.11.22"
