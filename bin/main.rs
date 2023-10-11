@@ -1,17 +1,39 @@
+use clap::Parser;
 use reqwest::Client;
 
+#[derive(Parser, Debug)]
+#[command(author, about, version, long_about = None)]
+pub struct Args {
+  #[arg(short, long)]
+  method: String,
+}
 
 #[tokio::main]
 async fn main() {
-    println!("Hello, world!");
-    run().await;
+  let args = Args::parse();
+  println!("Hello, world!");
+
+  run(&args.method).await;
 }
 
-
-async fn run() {
-
+async fn run(method: &String) {
   let client = Client::new();
-  let result = client.get("https://jsonplaceholder.typicode.com/users").send().await;
 
-  println!("{:#?}", result);
+  if method == "get" {
+    let reusult = client
+      .get("https://jsonplaceholder.typicode.com/users")
+      .send()
+      .await;
+
+    match reusult {
+      Ok(response) => {
+        let body = response.text().await.expect("failed to get response body");
+
+        println!("response: {:#?}", body);
+      }
+      Err(error) => {
+        println!("error: {:?}", error);
+      }
+    }
+  }
 }
