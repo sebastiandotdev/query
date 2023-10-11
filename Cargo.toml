@@ -5,5 +5,5 @@ edition = "2021"
 
 
 [[bin]]
-name = "terminal"
+name = "clippy"
 path = "bin/main.rs"
