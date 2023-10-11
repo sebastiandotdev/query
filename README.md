@@ -1,9 +1,3 @@
 # Welcome to the Terminal
 
-This repository contains the source code for:
-
-## About us
-
-**Why terminal?**
-
-- terminal is incridible build in rust, super fast and secure
+The **TERMINAL** is a command-line tool developed in Rust that empowers users to seamlessly interact with RESTful APIs from their terminal. Whether you're fetching data, posting information, or managing API resources, this CLI tool simplifies the process by offering a straightforward and intuitive interface.
