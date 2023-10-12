@@ -17,5 +17,10 @@ Cargo.toml -diff -merge -text
 .rustfmt.toml -diff -merge -text
 
 # Setup Binary
+
 *.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+
 target/* binary

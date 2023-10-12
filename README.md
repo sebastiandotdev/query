@@ -8,3 +8,11 @@ The **TERMINAL** is a command-line tool developed in Rust that empowers users to
 - Easy Configuration: Configure the base URL, authentication, and custom headers for your API requests.
 - HTTP Methods: Supports various HTTP methods, including GET, POST, PUT, DELETE, and more.
 - Testing and Documentation: Write tests to ensure functionality and provide detailed documentation for users.
+
+## Install
+
+
+## License
+
+This project is LICENSE **MIT**
+
