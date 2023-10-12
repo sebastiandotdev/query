@@ -1,0 +1,22 @@
+name: Develop PROD Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: Run Test
+      - name: Run test
+        run: cargo test --verbose
+  
