@@ -14,5 +14,5 @@ The **TERMINAL** is a command-line tool developed in Rust that empowers users to
 
 ## License
 
-This project is LICENSE **MIT**
+This project is LICENSE **MIT**.
 
