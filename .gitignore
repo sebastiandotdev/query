@@ -5,7 +5,3 @@ target/*
 *.dll
 *.pdb
 *.user
-
-# Folder
-[Bb]in
-[Dd]ebug*/
