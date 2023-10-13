@@ -3,14 +3,31 @@ name = "clippy"
 version = "0.0.1"
 authors = ["castrogarciajs"]
 license = "MIT"
+description = "Clippy is a CLI tool to get the latest news from the most popular news sites."
 repository = "https://github.com/castrogarciajs/clippy"
 edition = "2021"
 
+package.include = [
+    "bin/**", 
+    "Cargo.toml", 
+    "LICENSE", 
+    "README.md",
+]
 
+package.exclude = [
+    ".github/**",
+    ".gitignore",
+    "target/**",
+    "Cargo.lock",
+    "test/**",
+]
+
+# Root CLI binary
 [[bin]]
 name = "clippy"
 path = "bin/main.rs"
 
+# Test CLI binary
 [[test]]
 name = "test"
 path = "test/main_test.rs"
