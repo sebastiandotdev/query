@@ -4,8 +4,6 @@ version = "0.0.1"
 authors = ["castrogarciajs"]
 license = "MIT"
 description = "Clippy is a CLI tool to get the latest news from the most popular news sites."
-include = [ "bin/**", "Cargo.toml", "LICENSE", "README.md" ]
-exclude = [ ".github/**", ".gitignore", "target/**", "Cargo.lock", "test/**" ]
 repository = "https://github.com/castrogarciajs/clippy"
 edition = "2021"
 
