@@ -3,7 +3,7 @@ use std::fs;
 pub fn config(config: String) {
   if config == "init" {
     fs::write(
-      "clippy.config.json",
+      "minify.config.json",
       r#"{
             "urlBase": ""
         }"#,

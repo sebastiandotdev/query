@@ -5,3 +5,5 @@ target/*
 *.dll
 *.pdb
 *.user
+*.aps
+*.pch

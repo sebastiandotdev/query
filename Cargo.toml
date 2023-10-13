@@ -1,31 +1,19 @@
 [package]
-name = "clippy"
+name = "minify"
 version = "0.0.1"
 authors = ["castrogarciajs"]
 license = "MIT"
 description = "Clippy is a CLI tool to get the latest news from the most popular news sites."
+include = [ "bin/**", "Cargo.toml", "LICENSE", "README.md" ]
+exclude = [ ".github/**", ".gitignore", "target/**", "Cargo.lock", "test/**" ]
 repository = "https://github.com/castrogarciajs/clippy"
 edition = "2021"
 
-package.include = [
-    "bin/**", 
-    "Cargo.toml", 
-    "LICENSE", 
-    "README.md",
-]
-
-package.exclude = [
-    ".github/**",
-    ".gitignore",
-    "target/**",
-    "Cargo.lock",
-    "test/**",
-]
-
 # Root CLI binary
 [[bin]]
-name = "clippy"
+name = "minify"
 path = "bin/main.rs"
+doc = false
 
 # Test CLI binary
 [[test]]
