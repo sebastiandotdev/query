@@ -13,7 +13,7 @@ The **Clippy** is a command-line tool developed in Rust that empowers users to s
 Shell (Mac, Linux) - **Unstable**
 
 ```sh
-curl -fsSL https://clippy.land/install.sh | sh
+curl -fsSL https://minify.land/install.sh | sh
 ```
 
 ## License
