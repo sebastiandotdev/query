@@ -3,13 +3,13 @@ name = "minify"
 version = "0.0.1"
 authors = ["castrogarciajs"]
 license = "MIT"
-description = "Clippy is a CLI tool to get the latest news from the most popular news sites."
-repository = "https://github.com/castrogarciajs/clippy"
+description = "Rusty Fetcher is a CLI too"
+repository = "https://github.com/castrogarciajs/rusty_fetcher"
 edition = "2021"
 
 # Root CLI binary
 [[bin]]
-name = "minify"
+name = "fetchy"
 path = "bin/main.rs"
 doc = false
 
