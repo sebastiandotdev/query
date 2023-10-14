@@ -1,3 +1,10 @@
+/**
+ * Functions for method
+ * Minify -- Software Open Sources
+ * Manteiner @castrogarciajs
+ * 
+ */
+
 use reqwest::Client;
 
 pub async fn get(client: Client, url: String) {

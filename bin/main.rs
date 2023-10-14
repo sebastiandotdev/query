@@ -1,6 +1,6 @@
 /**
  * COPYRIGTH CLIPPY INICIALIZATION CLI
- * Clipppy --Software Open Sources
+ * Minify -- Software Open Sources
  * Manteiner @castrogarciajs
  *  
 */
@@ -13,13 +13,13 @@ use clap::Parser;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-  #[arg(short, long)]
+  #[arg(short, long, default_value = "")]
   method: String,
 
-  #[arg(short, long)]
+  #[arg(short, long, default_value = "")]
   url: String,
 
-  #[arg(short, long, required = true)]
+  #[arg(short, long, default_value = "minify.json")]
   config: String,
 }
 
