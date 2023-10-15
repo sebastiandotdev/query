@@ -1,13 +1,20 @@
 use std::fs;
 
-pub fn config(config: String) {
-  let json_config = r#"{
-    "name": "minify",
-    "urlBase": "",
-    "method": []
-  }"#;
+pub struct CreateConfig;
 
-  if config == "init" {
-    fs::write("minify.json", json_config).expect("Unable to write file");
+impl CreateConfig {
+  pub fn new() -> CreateConfig {
+    CreateConfig
+  }
+  pub fn config(&self, config: String) {
+    let json_config = r#"{
+      "name": "minify",
+      "urlBase": "",
+      "method": []
+    }"#;
+
+    if config == "init" {
+      fs::write("minify.json", json_config).expect("Unable to write file");
+    }
   }
 }
