@@ -2,7 +2,7 @@ use reqwest::Client;
 use serde::Deserialize;
 use std::fs::File;
 
-use crate::methods;
+use crate::methods::Methods;
 
 #[derive(Deserialize, Debug)]
 struct MinifyConfig {
@@ -24,7 +24,8 @@ pub async fn run(method: &String, url: &String) {
 }
 
 async fn actions(method: &String, client: Client, url: String) {
+  let methods_fn = Methods::new();
   if method == "get" {
-    methods::get(client, url).await;
+    methods_fn.get(client, url).await;
   }
 }
