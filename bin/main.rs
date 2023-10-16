@@ -4,7 +4,6 @@
  * Learning Rust by Building Real Applications
  * https://rustlanges.github.io/rust-book-es/
  */
-
 mod error;
 
 use clap::Parser;
@@ -21,8 +20,8 @@ pub struct CommandConfig {
 }
 
 impl CommandConfig {
-  fn new(command: &str) -> CommandConfig {
-    CommandConfig {
+  fn new(command: &str) -> Self {
+    Self {
       init: String::from(command),
     }
   }
@@ -33,8 +32,6 @@ impl CommandConfig {
     if &self.init != option {
       return Err(err);
     }
-
-    
 
     Ok(())
   }
@@ -48,9 +45,7 @@ fn main() {
   let create_config = init_config.create(&args.config);
 
   match create_config {
-    Ok(_) => {
-      println!("Create config file");
-    }
+    Ok(_) => println!("Create config file"),
     Err(e) => eprint!("{}", e),
   }
 }

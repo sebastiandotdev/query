@@ -1,4 +1,4 @@
-use core::fmt;
+use core::fmt::{Display, Formatter, Result};
 use std::error::Error;
 
 #[derive(Debug)]
@@ -7,8 +7,8 @@ pub struct CustomError {
 }
 
 impl CustomError {
-  pub fn new(message: &str) -> CustomError {
-    CustomError {
+  pub fn new(message: &str) -> Self {
+    Self {
       message: String::from(message),
     }
   }
@@ -16,8 +16,17 @@ impl CustomError {
 
 impl Error for CustomError {}
 
-impl fmt::Display for CustomError {
-  fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+impl Display for CustomError {
+  fn fmt(&self, formatter: &mut Formatter) -> Result {
     write!(formatter, "Error: {} \n", self.message)
   }
+}
+
+#[test]
+fn test_error() {
+  let err = CustomError::new("Error message test");
+
+  let formatted_err = format!("{}", err);
+
+  assert_eq!(formatted_err, "Error: Error message test \n")
 }
