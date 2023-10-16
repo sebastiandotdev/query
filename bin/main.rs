@@ -1,4 +1,14 @@
+/**
+ * @copyrigth (c) 2023-present, All rights reserved.
+ * @castrogarciajs Main file for the cli.
+ * Learning Rust by Building Real Applications
+ * https://rustlanges.github.io/rust-book-es/
+ */
+
+mod error;
+
 use clap::Parser;
+use error::CustomError;
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -6,33 +16,41 @@ struct Args {
   #[arg(short, long)]
   config: String,
 }
-
-fn main() {
-  let args = Args::parse();
-
-  let init_config = CommandConfig::new();
-
-  match args.config.as_str() {
-    "init" => init_config.create(&args.config),
-    _ => println!("No command found"),
-  }
-}
-
 pub struct CommandConfig {
   init: String,
 }
 
 impl CommandConfig {
-  fn new() -> CommandConfig {
-    const COMMAND_CONFIG: &str = "init";
+  fn new(command: &str) -> CommandConfig {
     CommandConfig {
-      init: String::from(COMMAND_CONFIG),
+      init: String::from(command),
     }
   }
 
-  fn create(&self, option: &String) {
-    if option == &self.init {
-      println!("Init command");
+  fn create(&self, option: &String) -> Result<(), CustomError> {
+    let err = CustomError::new("Invalid command see the --help option");
+
+    if &self.init != option {
+      return Err(err);
     }
+
+    
+
+    Ok(())
+  }
+}
+
+fn main() {
+  let args = Args::parse();
+  const COMMAND_CONFIG: &str = "init";
+  let init_config = CommandConfig::new(COMMAND_CONFIG);
+
+  let create_config = init_config.create(&args.config);
+
+  match create_config {
+    Ok(_) => {
+      println!("Create config file");
+    }
+    Err(e) => eprint!("{}", e),
   }
 }
