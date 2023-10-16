@@ -13,7 +13,7 @@ The **Rusty Fetcher** is a command-line tool developed in Rust that empowers use
 Shell (Mac, Linux) - **Unstable**
 
 ```sh
-curl -fsSL https://minify.land/install.sh | sh
+curl -fsSL https://rusty_install.land/install.sh | sh
 ```
 
 ## License
