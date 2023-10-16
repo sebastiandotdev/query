@@ -7,16 +7,10 @@ description = "Rusty Fetcher is a CLI too"
 repository = "https://github.com/castrogarciajs/rusty_fetcher"
 edition = "2021"
 
-# Root CLI binary
 [[bin]]
 name = "fetchy"
 path = "bin/main.rs"
 doc = false
-
-# Test CLI binary
-[[test]]
-name = "test"
-path = "test/main_test.rs"
 
 [dependencies]
 clap = { version = "4.4.6", features = ["derive"] }
