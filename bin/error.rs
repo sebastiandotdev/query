@@ -28,5 +28,5 @@ fn test_error() {
 
   let formatted_err = format!("{}", err);
 
-  assert_eq!(formatted_err, "Error: Error message test \n")
+  assert_eq!(formatted_err, "Error: Error message test")
 }
