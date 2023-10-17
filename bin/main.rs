@@ -8,6 +8,7 @@ mod error;
 
 use clap::Parser;
 use error::CustomError;
+use std::process;
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -33,6 +34,7 @@ impl CommandConfig {
       return Err(err);
     }
 
+    println!("create file succesfuly");
     Ok(())
   }
 }
@@ -42,10 +44,10 @@ fn main() {
   const COMMAND_CONFIG: &str = "init";
   let init_config = CommandConfig::new(COMMAND_CONFIG);
 
-  let create_config = init_config.create(&args.config);
+  let create_config: Result<(), CustomError> = init_config.create(&args.config);
 
-  match create_config {
-    Ok(_) => println!("Create config file"),
-    Err(e) => eprint!("{}", e),
+  if let Err(err) = create_config {
+    eprintln!("{}", err);
+    process::exit(1);
   }
 }

@@ -18,15 +18,14 @@ impl Error for CustomError {}
 
 impl Display for CustomError {
   fn fmt(&self, formatter: &mut Formatter) -> Result {
-    writeln!(formatter, "Error: {}", self.message)
+    write!(formatter, "Error: {}", self.message)
   }
 }
 
 #[test]
 fn test_error() {
   let err = CustomError::new("Error message test");
-
   let formatted_err = format!("{}", err);
 
-  assert_eq!(formatted_err, "Error: Error message test")
+  assert_eq!(formatted_err, "Error: Error message test");
 }
