@@ -18,7 +18,7 @@ impl Error for CustomError {}
 
 impl Display for CustomError {
   fn fmt(&self, formatter: &mut Formatter) -> Result {
-    write!(formatter, "Error: {} \n", self.message)
+    writeln!(formatter, "Error: {}", self.message)
   }
 }
 
