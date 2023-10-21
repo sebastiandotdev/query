@@ -18,10 +18,8 @@ Init config for fetchy
 
 ```sh
 fetchy --config init
-```
 
-```log
-Created file successfuly!
+Created file successfuly! # Generate file `fetchy.json`
 ```
 
 command: 
