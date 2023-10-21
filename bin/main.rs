@@ -7,8 +7,10 @@
 mod error;
 
 use clap::Parser;
+use colored::Colorize;
 use error::CustomError;
-use std::process;
+use serde_json::{json, to_string_pretty};
+use std::{fs, process};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -28,13 +30,35 @@ impl CommandConfig {
   }
 
   fn create(&self, option: &String) -> Result<(), CustomError> {
-    let err = CustomError::new("Invalid command see the --help option");
-
     if &self.init != option {
+      let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
     }
 
-    println!("create file succesfuly");
+    let config = json!({
+      "title": "Welcome to fetchy cli",
+      "description": "This is a cli for fetchy",
+      "version": "0.1.0",
+      "license": "MIT",
+      "repository": "https://github.com/castrogarciajs/rusty_fetchy",
+      "keywords": ["cli", "fetchy", "rust"],
+      "base_url": "https://{to_url}",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    });
+
+    let formatted_json = to_string_pretty(&config).unwrap_or_else(|err| {
+      eprintln!("{}", err);
+      process::exit(1)
+    });
+
+    let create_config = fs::write("fetchy.json", formatted_json);
+
+    if create_config.is_err() {
+      let err = CustomError::new("Error creating file");
+      return Err(err);
+    }
+
+    println!("{}", "created file succesfully!".green());
     Ok(())
   }
 }
