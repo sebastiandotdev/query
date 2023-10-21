@@ -1,0 +1,17 @@
+{
+  "lock": false,
+  "tasks": {
+    "dev": "deno run --watch --allow-net ./playground/main.js",
+    "start": "deno run --allow-net ./playground/main.js",
+    "check": "deno fmt --check"
+  },
+  "lint": {},
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": false,
+    "exclude": ["target/**/*", "node_modules/**/*"]
+  },
+  "compilerOptions": {
+    "strict": true
+  }
+}
