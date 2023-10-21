@@ -1,10 +1,10 @@
 [package]
-name = "rusty_fetcher"
+name = "fetchy"
 version = "0.1.0"
 authors = ["castrogarciajs"]
 license = "MIT"
 description = "Rusty Fetcher is a CLI too"
-repository = "https://github.com/castrogarciajs/rusty_fetcher"
+repository = "https://github.com/castrogarciajs/fetchy"
 edition = "2021"
 
 [[bin]]
