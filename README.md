@@ -1,4 +1,4 @@
-# Welcome to the Rusty Fetcher
+# Welcome to the Fetchy
 
 <img align="right" src="./ferry.png" height="150px" alt="the rust mascot">
 
