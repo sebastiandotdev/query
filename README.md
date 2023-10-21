@@ -12,12 +12,59 @@ The **Rusty Fetcher** is a command-line tool developed in Rust that empowers use
 - **HTTP Methods:** Supports various HTTP methods, including GET, POST, PUT, DELETE, and more.
 - **Testing and Documentation:** Write tests to ensure functionality and provide detailed documentation for users.
 
+## Example
+
+Init config for fetchy
+
+```sh
+fetchy --config init
+```
+
+```log
+Created file successfuly!
+```
+
+command: 
+```sh
+fetchy --method get --url /languagues
+```
+
+response:
+
+```log
+[
+  {
+    "name": "Java",
+    "publish_date": "1995",
+    "description": "Java is a widely used programming language that is designed to be platform-independent."
+  },
+  {
+    "name": "C++",
+    "publish_date": "1985",
+    "description": "C++ is a general-purpose programming language that supports object-oriented programming."
+  },
+  {
+    "name": "Python",
+    "publish_date": "1991",
+    "description": "Python is a high-level programming language known for its simplicity and readability."
+  },
+  {
+    "name": "C#",
+    "publish_date": "2000",
+    "description": "C# is a modern programming language developed by Microsoft for building a variety of applications."
+  },
+  {
+    "name": "Ruby",
+    "publish_date": "1995",
+    "description": "Ruby is a dynamic, object-oriented programming language known for its simplicity and productivity."
+  }
+]
+```
+
 ## Install
 Shell (Mac, Linux) - **Unstable**
 
-```sh
-curl -fsSL https://rusty_install.land/install.sh | sh
-```
+Soon...
 
 ## License
 
