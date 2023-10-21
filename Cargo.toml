@@ -1,6 +1,6 @@
 [package]
 name = "rusty_fetcher"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["castrogarciajs"]
 license = "MIT"
 description = "Rusty Fetcher is a CLI too"
