@@ -2,15 +2,19 @@
 
 <img align="right" src="./ferry.png" height="150px" alt="the rust mascot">
 
-
-The **Fetchy** is a command-line tool developed in Rust that empowers users to seamlessly interact with RESTful APIs from their terminal. Whether you're fetching data, posting information, or managing API resources, this CLI tool simplifies the process by offering a straightforward and intuitive interface.
-
+The **Fetchy** is a command-line tool developed in Rust that empowers users to
+seamlessly interact with RESTful APIs from their terminal. Whether you're
+fetching data, posting information, or managing API resources, this CLI tool
+simplifies the process by offering a straightforward and intuitive interface.
 
 ## Key Features
 
-- **Easy Configuration:** Configure the base URL, authentication, and custom headers for your API requests.
-- **HTTP Methods:** Supports various HTTP methods, including GET, POST, PUT, DELETE, and more.
-- **Testing and Documentation:** Write tests to ensure functionality and provide detailed documentation for users.
+- **Easy Configuration:** Configure the base URL, authentication, and custom
+  headers for your API requests.
+- **HTTP Methods:** Supports various HTTP methods, including GET, POST, PUT,
+  DELETE, and more.
+- **Testing and Documentation:** Write tests to ensure functionality and provide
+  detailed documentation for users.
 
 ## Example
 
@@ -22,7 +26,8 @@ fetchy --config init
 Created file successfuly! # Generate file `fetchy.json`
 ```
 
-command: 
+command:
+
 ```sh
 fetchy --method get --url /languagues
 ```
@@ -60,6 +65,7 @@ response:
 ```
 
 ## Install
+
 Shell (Mac, Linux) - **Unstable**
 
 Soon...
@@ -67,4 +73,3 @@ Soon...
 ## License
 
 This project is LICENSE **MIT**.
-
