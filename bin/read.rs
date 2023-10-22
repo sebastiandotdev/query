@@ -2,7 +2,7 @@ use crate::error::CustomError;
 use std::fs;
 
 pub struct ReadConfigFetchy {
-  pub base_url: String,
+  pub json: String,
 }
 
 impl ReadConfigFetchy {
@@ -13,8 +13,6 @@ impl ReadConfigFetchy {
       return Err(err);
     }
     let json = json.unwrap();
-    Ok(ReadConfigFetchy {
-      base_url: String::from(json),
-    })
+    Ok(ReadConfigFetchy { json })
   }
 }
