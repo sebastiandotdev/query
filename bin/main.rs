@@ -90,7 +90,7 @@ impl Method {
       return Err(err);
     }
 
-    let read_config = ReadConfigFetchy::new();
+    let _read_config = ReadConfigFetchy::new();
 
     Ok(())
   }
