@@ -84,16 +84,13 @@ impl Method {
       delete: args.delete,
     }
   }
-   fn method_get(&self, option: &String) -> Result<(), CustomError> {
-
+  fn method_get(&self, option: &String) -> Result<(), CustomError> {
     if &self.get != option {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
     }
 
     let read_config = ReadConfigFetchy::new();
-    
-   
 
     Ok(())
   }
