@@ -1,5 +1,5 @@
 {
-  "base_url": "http://localhost:8080",
+  "base_url": "https://{to_url}",
   "description": "This is a cli for fetchy",
   "keywords": [
     "cli",
