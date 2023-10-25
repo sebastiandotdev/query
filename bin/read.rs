@@ -1,6 +1,7 @@
 use crate::error::CustomError;
 use std::fs;
 
+#[derive(Debug)]
 pub struct ReadConfigFetchy {
   pub json: String,
 }
