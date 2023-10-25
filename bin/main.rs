@@ -11,7 +11,6 @@ use clap::Parser;
 use colored::Colorize;
 use error::CustomError;
 use read::ReadConfigFetchy;
-use serde_json::{json, to_string_pretty};
 use std::{fs, process};
 
 #[derive(Debug, Parser)]
@@ -20,8 +19,19 @@ struct Args {
   #[arg(short, long, default_value = "fetchy.json")]
   config: String,
 
-  #[arg(short, long)]
+  #[arg(short, long, default_value = "get")]
   method: String,
+}
+#[derive(Debug, serde::Deserialize)]
+struct ConfigJSON {
+  title: String,
+  description: String,
+  version: String,
+  license: String,
+  repository: String,
+  keywords: Vec<String>,
+  base_url: String,
+  methods: Vec<String>,
 }
 pub struct CommandConfig {
   init: String,
@@ -40,7 +50,7 @@ impl CommandConfig {
       return Err(err);
     }
 
-    let config = json!({
+    let config = serde_json::json!({
       "title": "Welcome to fetchy cli",
       "description": "This is a cli for fetchy",
       "version": "0.1.0",
@@ -51,10 +61,11 @@ impl CommandConfig {
       "methods": ["GET", "POST", "PUT", "DELETE"]
     });
 
-    let formatted_json = to_string_pretty(&config).unwrap_or_else(|err| {
-      eprintln!("{}", err);
-      process::exit(1)
-    });
+    let formatted_json =
+      serde_json::to_string_pretty(&config).unwrap_or_else(|err| {
+        eprintln!("{}", err);
+        process::exit(1)
+      });
 
     let create_config = fs::write("fetchy.json", formatted_json);
 
@@ -84,14 +95,19 @@ impl Method {
       delete: args.delete,
     }
   }
-  fn method_get(&self, option: &String) -> Result<(), CustomError> {
-    if &self.get != option {
-      let err = CustomError::new("Invalid command see the --help option");
-      return Err(err);
-    }
+  fn method_get(&self) -> serde_json::Result<()> {
+    let read_config = ReadConfigFetchy::new().unwrap();
 
-    let _read_config = ReadConfigFetchy::new();
+    let json: ConfigJSON = serde_json::from_str(&read_config.json)?;
 
+    println!("{}", json.base_url);
+    println!("{:?}", json.methods);
+    println!("{}", json.title);
+    println!("{}", json.description);
+    println!("{}", json.version);
+    println!("{}", json.license);
+    println!("{}", json.repository);
+    println!("{:?}", json.keywords);
     Ok(())
   }
 }
@@ -111,7 +127,7 @@ fn main() {
 
   let create_config = init_config.create(&args.config);
 
-  let get = methods_config.method_get(&args.method);
+  let get = methods_config.method_get();
 
   if let Err(err) = get {
     eprintln!("{}", err);
