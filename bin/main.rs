@@ -127,9 +127,11 @@ fn main() {
 
   if args.method == "get" {
     println!("get method");
-    methods_config.method_get(&args.method).unwrap_or_else(|err| {
-      eprintln!("{}", err);
-      process::exit(1);
-    });
+    methods_config
+      .method_get(&args.method)
+      .unwrap_or_else(|err| {
+        eprintln!("{}", err);
+        process::exit(1);
+      });
   }
 }
