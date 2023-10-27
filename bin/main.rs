@@ -11,6 +11,7 @@ use clap::Parser;
 use colored::Colorize;
 use error::CustomError;
 use read::ReadConfigFetchy;
+use serde::Deserialize;
 use std::{fs, process};
 
 #[derive(Debug, Parser)]
@@ -22,16 +23,9 @@ struct Args {
   #[arg(short, long, default_value = "get")]
   method: String,
 }
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, Deserialize)]
 struct ConfigJSON {
-  title: String,
-  description: String,
-  version: String,
-  license: String,
-  repository: String,
-  keywords: Vec<String>,
   base_url: String,
-  methods: Vec<String>,
 }
 pub struct CommandConfig {
   init: String,
@@ -95,19 +89,17 @@ impl Method {
       delete: args.delete,
     }
   }
-  fn method_get(&self) -> serde_json::Result<()> {
+  fn method_get(&self, option: &String) -> Result<(), CustomError> {
+    if &self.get != option {
+      let err = CustomError::new("Invalid command see the --help option");
+      return Err(err);
+    }
+
     let read_config = ReadConfigFetchy::new().unwrap();
 
-    let json: ConfigJSON = serde_json::from_str(&read_config.json)?;
+    let json: ConfigJSON = serde_json::from_str(&read_config.json).unwrap();
 
     println!("{}", json.base_url);
-    println!("{:?}", json.methods);
-    println!("{}", json.title);
-    println!("{}", json.description);
-    println!("{}", json.version);
-    println!("{}", json.license);
-    println!("{}", json.repository);
-    println!("{:?}", json.keywords);
     Ok(())
   }
 }
@@ -125,16 +117,19 @@ fn main() {
   let init_config = CommandConfig::new(COMMAND_CONFIG);
   let methods_config = Method::new(methods);
 
-  let create_config = init_config.create(&args.config);
-
-  let get = methods_config.method_get();
-
-  if let Err(err) = get {
-    eprintln!("{}", err);
-    process::exit(1);
+  if args.config == "init" {
+    init_config.create(&args.config).unwrap_or_else(|err| {
+      eprintln!("{}", err);
+      process::exit(1);
+    });
+    println!("{}", "init command".green());
   }
-  if let Err(err) = create_config {
-    eprintln!("{}", err);
-    process::exit(1);
+
+  if args.method == "get" {
+    println!("get method");
+    methods_config.method_get(&args.method).unwrap_or_else(|err| {
+      eprintln!("{}", err);
+      process::exit(1);
+    });
   }
 }
