@@ -55,11 +55,6 @@ response:
     "name": "C#",
     "publish_date": "2000",
     "description": "C# is a modern programming language developed by Microsoft for building a variety of applications."
-  },
-  {
-    "name": "Ruby",
-    "publish_date": "1995",
-    "description": "Ruby is a dynamic, object-oriented programming language known for its simplicity and productivity."
   }
 ]
 ```
