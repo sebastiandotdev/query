@@ -22,6 +22,9 @@ struct Args {
 
   #[arg(short, long, default_value = "get")]
   method: String,
+
+  #[arg(short, long, default_value = "/")]
+  url: String,
 }
 #[derive(Debug, Deserialize)]
 struct ConfigJSON {
@@ -89,7 +92,7 @@ impl Method {
       delete: args.delete,
     }
   }
-  fn method_get(&self, option: &String) -> Result<(), CustomError> {
+  fn method_get(&self, option: &String, endpoint: &String) -> Result<(), CustomError> {
     if &self.get != option {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
@@ -98,8 +101,10 @@ impl Method {
     let read_config = ReadConfigFetchy::new().unwrap();
 
     let json: ConfigJSON = serde_json::from_str(&read_config.json).unwrap();
+    
+    let client = reqwest::Client::new();
 
-    println!("{}", json.base_url);
+    let _ = client.get(format!("{}{}", json.base_url, endpoint));
     Ok(())
   }
 }
@@ -128,7 +133,7 @@ fn main() {
   if args.method == "get" {
     println!("get method");
     methods_config
-      .method_get(&args.method)
+      .method_get(&args.method, &args.url)
       .unwrap_or_else(|err| {
         eprintln!("{}", err);
         process::exit(1);
