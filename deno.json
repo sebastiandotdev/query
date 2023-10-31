@@ -1,8 +1,8 @@
 {
   "lock": false,
   "tasks": {
-    "dev": "deno run --watch --allow-net ./playground/main.js",
-    "start": "deno run --allow-net ./playground/main.js",
+    "dev": "deno run --watch --allow-net ./playground/main.ts",
+    "start": "deno run --allow-net ./playground/main.ts",
     "check": "deno fmt --check"
   },
   "lint": {},
