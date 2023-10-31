@@ -92,7 +92,11 @@ impl Method {
       delete: args.delete,
     }
   }
-  fn method_get(&self, option: &String, endpoint: &String) -> Result<(), CustomError> {
+  fn method_get(
+    &self,
+    option: &String,
+    endpoint: &String,
+  ) -> Result<(), CustomError> {
     if &self.get != option {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
@@ -101,7 +105,7 @@ impl Method {
     let read_config = ReadConfigFetchy::new().unwrap();
 
     let json: ConfigJSON = serde_json::from_str(&read_config.json).unwrap();
-    
+
     let client = reqwest::Client::new();
 
     let _ = client.get(format!("{}{}", json.base_url, endpoint));
