@@ -30,6 +30,7 @@ struct Args {
 struct ConfigJSON {
   base_url: String,
 }
+
 pub struct CommandConfig {
   init: String,
 }
@@ -92,7 +93,7 @@ impl Method {
       delete: args.delete,
     }
   }
-  fn method_get(
+  async fn method_get(
     &self,
     option: &String,
     endpoint: &String,
@@ -108,12 +109,46 @@ impl Method {
 
     let client = reqwest::Client::new();
 
-    let _ = client.get(format!("{}{}", json.base_url, endpoint));
+    let res = client
+      .get(format!("{}/{}", json.base_url, endpoint))
+      .send()
+      .await
+      .unwrap_or_else(|open_err| {
+        eprintln!("{}", open_err.to_string().red());
+        process::exit(1);
+      });
+
+    let mut content = String::new();
+    if let Ok(value) = res.text().await {
+      content = value;
+    }
+    let parsed_json: serde_json::Value = serde_json::from_str(&content)
+      .unwrap_or_else(|err| {
+        eprintln!("{}", err.to_string().red());
+        process::exit(1);
+      });
+    match parsed_json {
+      serde_json::Value::Array(items) => {
+        for item in items {
+          let json =
+            serde_json::to_string_pretty(&item).unwrap_or_else(|err| {
+              eprintln!("{}", err.to_string().red());
+              process::exit(1);
+            });
+          println!("{}", json.to_string().italic().green());
+        }
+      }
+      _ => {
+        println!("La respuesta no es un array")
+      }
+    }
+
     Ok(())
   }
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
   let args = Args::parse();
   const COMMAND_CONFIG: &str = "init";
   let methods = Method {
@@ -138,6 +173,7 @@ fn main() {
     println!("get method");
     methods_config
       .method_get(&args.method, &args.url)
+      .await
       .unwrap_or_else(|err| {
         eprintln!("{}", err);
         process::exit(1);
