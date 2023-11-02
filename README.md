@@ -29,7 +29,7 @@ Created file successfuly! # Generate file `fetchy.json`
 command:
 
 ```sh
-fetchy --method get --url /languagues
+fetchy --method get --url languagues
 ```
 
 response:
