@@ -1,0 +1,27 @@
+name: Deploy to Crate
+
+on:
+  push:
+     tags:        
+      - '*' # Push events to matching tags
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - run: cargo publish --token ${CARGO_PUBLISH}
+        env:
+          CARGO_PUBLISH: ${{ secrets.CARGO_PUBLISH }}
