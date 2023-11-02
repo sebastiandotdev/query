@@ -3,7 +3,7 @@ name: Deploy to Crate
 on:
   push:
      tags:        
-      - '*' # Push events to matching tags
+      - '*'
 
 env:
   CARGO_TERM_COLOR: always
@@ -18,7 +18,6 @@ jobs:
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
           override: true
 
