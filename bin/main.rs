@@ -12,7 +12,7 @@ use colored::Colorize;
 use error::CustomError;
 use read::ReadConfigFetchy;
 use serde::Deserialize;
-use std::{fs, process};
+use std::{any::Any, fs, process};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -55,8 +55,8 @@ impl CommandConfig {
       "license": "MIT",
       "repository": "https://github.com/castrogarciajs/rusty_fetchy",
       "keywords": ["cli", "fetchy", "rust"],
-      "base_url": "https://{to_url}",
-      "methods": ["GET", "POST", "PUT", "DELETE"]
+      "base_url": "http://{to_url}",
+      "methods": ["GET"] // Method supported
     });
 
     let formatted_json =
@@ -145,6 +145,35 @@ impl Method {
 
     Ok(())
   }
+  async fn method_post(
+    &self,
+    option: &String,
+    endpoint: &String,
+    _data: Box<dyn Any>,
+  ) -> Result<(), CustomError> {
+    if &self.post != option {
+      let err = CustomError::new("Invalid command see the --help option");
+      return Err(err);
+    }
+    let json_config = ReadConfigFetchy::new().unwrap();
+    let json: ConfigJSON = serde_json::from_str(&json_config.json).unwrap();
+    let client = reqwest::Client::new();
+    let res = client
+      .post(format!("{}/{}", json.base_url, endpoint))
+      .body("data")
+      .send()
+      .await
+      .unwrap_or_else(|open_err| {
+        eprintln!("{}", open_err.to_string().red());
+        process::exit(1);
+      });
+    if res.status().is_success() {
+      println!("{}", "created succesfully".green());
+    } else {
+      println!("{}", "error creating".red());
+    }
+    Ok(())
+  }
 }
 
 #[tokio::main]
@@ -173,6 +202,16 @@ async fn main() {
     println!("get method");
     methods_config
       .method_get(&args.method, &args.url)
+      .await
+      .unwrap_or_else(|err| {
+        eprintln!("{}", err);
+        process::exit(1);
+      });
+  }
+  if args.method == "post" {
+    println!("post method");
+    methods_config
+      .method_post(&args.method, &args.url, Box::new("data"))
       .await
       .unwrap_or_else(|err| {
         eprintln!("{}", err);
