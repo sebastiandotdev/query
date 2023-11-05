@@ -22,6 +22,8 @@ router
         context.response.body = 'No dinosaurs found.'
       }
     }
+  }).post('/api', (context) => {
+    context.response.body = 'Created new dinosaur'
   })
 
 export default router
