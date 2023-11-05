@@ -56,7 +56,7 @@ impl CommandConfig {
       "repository": "https://github.com/castrogarciajs/rusty_fetchy",
       "keywords": ["cli", "fetchy", "rust"],
       "base_url": "http://{to_url}",
-      "methods": ["GET"] // Method supported
+      "methods": ["GET", "POST"] // Method supported
     });
 
     let formatted_json =
