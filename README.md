@@ -1,8 +1,8 @@
-# Welcome to the Fetchy
+# Welcome to the Query
 
 <img align="right" src="./ferry.png" height="150px" alt="the rust mascot">
 
-The **Fetchy** is a command-line tool developed in Rust that empowers users to
+The **Query** is a command-line tool developed in Rust that empowers users to
 seamlessly interact with RESTful APIs from their terminal. Whether you're
 fetching data, posting information, or managing API resources, this CLI tool
 simplifies the process by offering a straightforward and intuitive interface.
@@ -18,10 +18,10 @@ simplifies the process by offering a straightforward and intuitive interface.
 
 ## Example
 
-Init config for fetchy
+Init config for query
 
 ```sh
-fetchy --config init
+query --config init
 
 Created file successfuly! # Generate file `fetchy.json`
 ```
@@ -29,7 +29,7 @@ Created file successfuly! # Generate file `fetchy.json`
 command:
 
 ```sh
-fetchy --method get --url languagues
+query --method get --url languagues
 ```
 
 response:
