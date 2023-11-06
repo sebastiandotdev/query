@@ -1,5 +1,5 @@
 [package]
-name = "fetchy"
+name = "query"
 version = "0.2.8"
 authors = ["castrogarciajs"]
 license = "MIT"
@@ -8,7 +8,7 @@ repository = "https://github.com/castrogarciajs/fetchy"
 edition = "2021"
 
 [[bin]]
-name = "fetchy"
+name = "query"
 path = "bin/main.rs"
 doc = false
 
