@@ -23,7 +23,7 @@ Init config for query
 ```sh
 query --config init
 
-Created file successfuly! # Generate file `fetchy.json`
+Created file successfuly! # Generate file `query.json`
 ```
 
 command:
