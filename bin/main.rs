@@ -10,14 +10,14 @@ mod read;
 use clap::Parser;
 use colored::Colorize;
 use error::CustomError;
-use read::ReadConfigFetchy;
+use read::ReadConfigQuery;
 use serde::Deserialize;
 use std::{any::Any, fs, process};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-  #[arg(short, long, default_value = "fetchy.json")]
+  #[arg(short, long, default_value = "query.json")]
   config: String,
 
   #[arg(short, long, default_value = "get")]
@@ -49,14 +49,14 @@ impl CommandConfig {
     }
 
     let config = serde_json::json!({
-      "title": "Welcome to fetchy cli",
-      "description": "This is a cli for fetchy",
+      "title": "Welcome to query cli",
+      "description": "Query CLI to do request http",
       "version": "0.1.0",
       "license": "MIT",
-      "repository": "https://github.com/castrogarciajs/rusty_fetchy",
-      "keywords": ["cli", "fetchy", "rust"],
-      "base_url": "http://{to_url}",
-      "methods": ["GET", "POST"] // Method supported
+      "repository": "https://github.com/castrogarciajs/query",
+      "keywords": ["cli", "query", "rust"],
+      "base_url": "http://localhost:8080",
+      "methods": ["GET", "POST"] //# Method supported
     });
 
     let formatted_json =
@@ -65,7 +65,7 @@ impl CommandConfig {
         process::exit(1)
       });
 
-    let create_config = fs::write("fetchy.json", formatted_json);
+    let create_config = fs::write("query.json", formatted_json);
 
     if create_config.is_err() {
       let err = CustomError::new("Error creating file");
@@ -103,7 +103,7 @@ impl Method {
       return Err(err);
     }
 
-    let read_config = ReadConfigFetchy::new().unwrap();
+    let read_config = ReadConfigQuery::new().unwrap();
 
     let json: ConfigJSON = serde_json::from_str(&read_config.json).unwrap();
 
@@ -139,7 +139,7 @@ impl Method {
         }
       }
       _ => {
-        println!("La respuesta no es un array")
+        println!("The response is not an array")
       }
     }
 
@@ -155,7 +155,7 @@ impl Method {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
     }
-    let json_config = ReadConfigFetchy::new().unwrap();
+    let json_config = ReadConfigQuery::new().unwrap();
     let json: ConfigJSON = serde_json::from_str(&json_config.json).unwrap();
     let client = reqwest::Client::new();
     let res = client
@@ -209,7 +209,7 @@ async fn main() {
       });
   }
   if args.method == "post" {
-    println!("post method");
+    println!("{}\n", String::from("post method").italic().green());
     methods_config
       .method_post(&args.method, &args.url, Box::new("data"))
       .await
