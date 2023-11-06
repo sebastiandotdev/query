@@ -3,7 +3,7 @@ name = "query"
 version = "0.2.8"
 authors = ["castrogarciajs"]
 license = "MIT"
-description = "Fetchy is a CLI too"
+description = "Query CLI to do request http"
 repository = "https://github.com/castrogarciajs/fetchy"
 edition = "2021"
 
