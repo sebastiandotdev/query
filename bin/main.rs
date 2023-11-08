@@ -12,7 +12,7 @@ use colored::Colorize;
 use error::CustomError;
 use read::ReadConfigQuery;
 use serde::Deserialize;
-use std::{any::Any, fs, process};
+use std::{any::Any, fs, io, process};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -155,22 +155,43 @@ impl Method {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
     }
-    let json_config = ReadConfigQuery::new().unwrap();
+
+    let json_config: ReadConfigQuery = ReadConfigQuery::new().unwrap();
     let json: ConfigJSON = serde_json::from_str(&json_config.json).unwrap();
+
+    println!("Hola!; Que dato enviaras procede a escribirlos: ");
+    println!("NOTA: Por favor escribe el JSON sin presionar enter");
+    println!("HELP: Si deseas cancelar el prompt escribe la palabra *exit*");
+
+    let mut value = String::new();
+    loop {
+      let mut input = String::new();
+      io::stdin().read_line(&mut input).expect("Error read");
+
+      if input.trim() == "exit" {
+        break;
+      }
+      value.push_str(&input);
+    }
+
+    println!("{}", value);
     let client = reqwest::Client::new();
     let res = client
       .post(format!("{}/{}", json.base_url, endpoint))
-      .body("data")
+      .body(value)
       .send()
       .await
       .unwrap_or_else(|open_err| {
         eprintln!("{}", open_err.to_string().red());
         process::exit(1);
       });
+
     if res.status().is_success() {
-      println!("{}", "created succesfully".green());
+      println!("Response server: {}", res.text().await.expect("err"));
+      println!("Message: {}", "created succesfully".green());
     } else {
-      println!("{}", "error creating".red());
+      println!("Status: {}", res.status());
+      println!("Message: {}", "Oh, something error is server".red());
     }
     Ok(())
   }
