@@ -24,6 +24,7 @@ router
     }
   }).post('/api', (context) => {
     context.response.body = 'Created new dinosaur'
+    console.log(context)
   })
 
 export default router
