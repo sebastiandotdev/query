@@ -8,8 +8,19 @@
     "ghcr.io/devcontainers/features/rust:1": {
       "version": "latest",
       "profile": "minimal"
+    },
+    "ghcr.io/devcontainers-contrib/features/deno":{
+      "version": "latest"
     }
-  }
+},
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"rust-lang.rust-analyzer",
+			"denoland.vscode-deno"
+		]
+	}
+}
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 
