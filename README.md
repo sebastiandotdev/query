@@ -16,7 +16,6 @@ simplifies the process by offering a straightforward and intuitive interface.
 - **Testing and Documentation:** Write tests to ensure functionality and provide
   detailed documentation for users.
 
-
 ## Install
 
 Soon...
