@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in contributing to Rusty Fetcher! Please take a moment
+Thanks for your interest in contributing to Query CLI! Please take a moment
 to review this document **before submitting a pull request**.
 
 ## Pull requests
@@ -29,4 +29,4 @@ cargo build && cargo test
 ```
 
 Please ensure that the tests are passing when submitting a pull request. If
-you're adding new features to Rusty Fecther, please include tests.
+you're adding new features to Query, please include tests.
