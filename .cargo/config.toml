@@ -1,6 +1,0 @@
-# Config for cargo.
-# See
-# https://doc.rust-lang.org/cargo/reference/config.html
-
-[term]
-color = 'auto' # defaults value
