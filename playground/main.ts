@@ -1,8 +1,7 @@
 /**
- * Playground for fetchy with Deno
+ * Playground for query with Deno
  * Github: https://github.com/castrogarciajs/fetchy
- * 2023 - Sebastian Castro García - MIT License
- * @version 0.1.0
+ * 2023 - Sebastian Castro - MIT License
  */
 
 import { Application, oakCors } from './deps.ts'
