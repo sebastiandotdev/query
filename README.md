@@ -22,7 +22,7 @@ Soon...
 
 ## Example
 
-Init configuration for query-cli:
+Init configuration for query cli:
 
 ```sh
 query --config init
