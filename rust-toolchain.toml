@@ -1,7 +1,0 @@
-[toolchain]
-
-# Version Rust
-channel = "1.73.0"
-
-# Tools 
-components = ["clippy", "rustfmt"]
