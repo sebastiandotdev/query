@@ -123,7 +123,11 @@ impl Method {
     Ok(())
   }
 
-  pub fn method_delete(&self, option: &String, endpoint: &String) -> Result<(), CustomError> {
+  pub fn method_delete(
+    &self,
+    option: &String,
+    endpoint: &String,
+  ) -> Result<(), CustomError> {
     if &self.delete != option {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
