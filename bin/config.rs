@@ -27,7 +27,7 @@ impl CommandConfig {
       "repository": "https://github.com/castrogarciajs/query",
       "keywords": ["cli", "query", "rust"],
       "base_url": "http://localhost:8080",
-      "methods": ["GET", "POST"] //# Method supported
+      "methods": ["GET", "POST", "DELETE"] //# Method supported
     });
 
     let formatted_json =
