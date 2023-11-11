@@ -1,19 +1,19 @@
+mod base_url;
+mod config;
 /**
  * @copyrigth (c) 2023-present, All rights reserved.
  * @castrogarciajs Main file for the cli.
  * Learning Rust by Building Real Applications
  * https://rustlanges.github.io/rust-book-es/
- * Dev container for rust
  */
 mod error;
+mod methods;
 mod read;
 
 use clap::Parser;
 use colored::Colorize;
-use error::CustomError;
 use read::ReadConfigQuery;
-use serde::Deserialize;
-use std::{any::Any, fs, io, process};
+use std::process;
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -27,190 +27,20 @@ struct Args {
   #[arg(short, long, default_value = "/")]
   url: String,
 }
-#[derive(Debug, Deserialize)]
-struct ConfigJSON {
-  base_url: String,
-}
-
-pub struct CommandConfig {
-  init: String,
-}
-
-impl CommandConfig {
-  fn new(command: &str) -> Self {
-    Self {
-      init: String::from(command),
-    }
-  }
-
-  fn create(&self, option: &String) -> Result<(), CustomError> {
-    if &self.init != option {
-      let err = CustomError::new("Invalid command see the --help option");
-      return Err(err);
-    }
-
-    let config = serde_json::json!({
-      "title": "Welcome to query cli",
-      "description": "Query CLI to do request http",
-      "version": "0.1.0",
-      "license": "MIT",
-      "repository": "https://github.com/castrogarciajs/query",
-      "keywords": ["cli", "query", "rust"],
-      "base_url": "http://localhost:8080",
-      "methods": ["GET", "POST"] //# Method supported
-    });
-
-    let formatted_json =
-      serde_json::to_string_pretty(&config).unwrap_or_else(|err| {
-        eprintln!("{}", err);
-        process::exit(1)
-      });
-
-    let create_config = fs::write("query.json", formatted_json);
-
-    if create_config.is_err() {
-      let err = CustomError::new("Error creating file");
-      return Err(err);
-    }
-
-    println!("{}", "created file succesfully!".green());
-    Ok(())
-  }
-}
-
-struct Method {
-  get: String,
-  post: String,
-  put: String,
-  delete: String,
-}
-
-impl Method {
-  fn new(args: Method) -> Self {
-    Self {
-      get: args.get,
-      post: args.post,
-      put: args.put,
-      delete: args.delete,
-    }
-  }
-  async fn method_get(
-    &self,
-    option: &String,
-    endpoint: &String,
-  ) -> Result<(), CustomError> {
-    if &self.get != option {
-      let err = CustomError::new("Invalid command see the --help option");
-      return Err(err);
-    }
-
-    let read_config = ReadConfigQuery::new().unwrap();
-
-    let json: ConfigJSON = serde_json::from_str(&read_config.json).unwrap();
-
-    let client = reqwest::Client::new();
-
-    let res = client
-      .get(format!("{}/{}", json.base_url, endpoint))
-      .send()
-      .await
-      .unwrap_or_else(|open_err| {
-        eprintln!("{}", open_err.to_string().red());
-        process::exit(1);
-      });
-
-    let mut content = String::new();
-    if let Ok(value) = res.text().await {
-      content = value;
-    }
-    let parsed_json: serde_json::Value = serde_json::from_str(&content)
-      .unwrap_or_else(|err| {
-        eprintln!("{}", err.to_string().red());
-        process::exit(1);
-      });
-    match parsed_json {
-      serde_json::Value::Array(items) => {
-        for item in items {
-          let json =
-            serde_json::to_string_pretty(&item).unwrap_or_else(|err| {
-              eprintln!("{}", err.to_string().red());
-              process::exit(1);
-            });
-          println!("{}", json.to_string().italic().green());
-        }
-      }
-      _ => {
-        println!("The response is not an array")
-      }
-    }
-
-    Ok(())
-  }
-  async fn method_post(
-    &self,
-    option: &String,
-    endpoint: &String,
-    _data: Box<dyn Any>,
-  ) -> Result<(), CustomError> {
-    if &self.post != option {
-      let err = CustomError::new("Invalid command see the --help option");
-      return Err(err);
-    }
-
-    let json_config: ReadConfigQuery = ReadConfigQuery::new().unwrap();
-    let json: ConfigJSON = serde_json::from_str(&json_config.json).unwrap();
-
-    println!("Hola!; Que dato enviaras procede a escribirlos: ");
-    println!("NOTA: Por favor escribe el JSON sin presionar enter");
-    println!("HELP: Si deseas cancelar el prompt escribe la palabra *exit*");
-
-    let mut value = String::new();
-    loop {
-      let mut input = String::new();
-      io::stdin().read_line(&mut input).expect("Error read");
-
-      if input.trim() == "exit" {
-        break;
-      }
-      value.push_str(&input);
-    }
-
-    println!("{}", value);
-    let client = reqwest::Client::new();
-    let res = client
-      .post(format!("{}/{}", json.base_url, endpoint))
-      .body(value)
-      .send()
-      .await
-      .unwrap_or_else(|open_err| {
-        eprintln!("{}", open_err.to_string().red());
-        process::exit(1);
-      });
-
-    if res.status().is_success() {
-      println!("Response server: {}", res.text().await.expect("err"));
-      println!("Message: {}", "created succesfully".green());
-    } else {
-      println!("Status: {}", res.status());
-      println!("Message: {}", "Oh, something error is server".red());
-    }
-    Ok(())
-  }
-}
 
 #[tokio::main]
 async fn main() {
   let args = Args::parse();
   const COMMAND_CONFIG: &str = "init";
-  let methods = Method {
+  let methods = methods::Method {
     get: String::from("get"),
     post: String::from("post"),
     put: String::from("put"),
     delete: String::from("delete"),
   };
 
-  let init_config = CommandConfig::new(COMMAND_CONFIG);
-  let methods_config = Method::new(methods);
+  let init_config = config::CommandConfig::new(COMMAND_CONFIG);
+  let methods_config = methods::Method::new(methods);
 
   if args.config == "init" {
     init_config.create(&args.config).unwrap_or_else(|err| {
@@ -235,6 +65,16 @@ async fn main() {
     methods_config
       .method_post(&args.method, &args.url, Box::new("data"))
       .await
+      .unwrap_or_else(|err| {
+        eprintln!("{}", err);
+        process::exit(1);
+      });
+  }
+
+  if args.method == "delete" {
+    println!("{}\n", String::from("delete method").italic().green());
+    methods_config
+      .method_delete(&args.method, &args.url)
       .unwrap_or_else(|err| {
         eprintln!("{}", err);
         process::exit(1);
