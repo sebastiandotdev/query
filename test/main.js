@@ -4,8 +4,8 @@
  * 2023 - Sebastian Castro - MIT License
  */
 
-import { Application, oakCors } from './deps.ts'
-import router from './endpoint.ts'
+import { Application, oakCors } from './deps.js'
+import router from './routes.js'
 
 const app = new Application()
 
