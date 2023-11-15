@@ -1,0 +1,17 @@
+{
+  "base_url": "http://localhost:8000",
+  "description": "Query CLI to do request http",
+  "keywords": [
+    "cli",
+    "query",
+    "rust"
+  ],
+  "license": "MIT",
+  "methods": [
+    "GET",
+    "POST"
+  ],
+  "repository": "https://github.com/castrogarciajs/query",
+  "title": "Welcome to query cli",
+  "version": "0.1.0"
+}
