@@ -12,6 +12,7 @@
     "exclude": ["target/**/*", "node_modules/**/*"]
   },
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "checkJs": true
   }
 }
