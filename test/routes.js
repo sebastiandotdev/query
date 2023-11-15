@@ -1,4 +1,4 @@
-import { Router } from './deps.ts'
+import { Router } from './deps.js'
 import data from './data.json' assert { type: 'json' }
 
 const router = new Router()
