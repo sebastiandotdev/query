@@ -20,7 +20,7 @@ simplifies the process by offering a straightforward and intuitive interface.
 
 Soon...
 
-## Example
+## Example CLI
 
 Init configuration for query cli:
 
