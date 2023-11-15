@@ -7,9 +7,6 @@ description = "Query CLI to do request http"
 repository = "https://github.com/castrogarciajs/fetchy"
 edition = "2021"
 
-[[bin]]
-name = "query"
-path = "bin/main.rs"
 
 [dependencies]
 clap = { version = "4.4.6", features = ["derive"] }
