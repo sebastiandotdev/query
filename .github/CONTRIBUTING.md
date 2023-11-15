@@ -1,7 +1,7 @@
 # Contributing
 
-Thanks for your interest in contributing to Query CLI! Please take a moment
-to review this document **before submitting a pull request**.
+Thanks for your interest in contributing to Query CLI! Please take a moment to
+review this document **before submitting a pull request**.
 
 ## Pull requests
 
