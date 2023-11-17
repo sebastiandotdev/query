@@ -5,7 +5,9 @@
     "start": "deno run --allow-net ./test/main.js",
     "check": "deno fmt --check"
   },
-  "lint": {},
+  "lint": {
+    "rules": {}
+  },
   "fmt": {
     "singleQuote": true,
     "semiColons": false,
