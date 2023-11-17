@@ -74,7 +74,8 @@ async fn main() {
   if args.method == "delete" {
     println!("{}\n", String::from("delete method").italic().green());
     methods_config
-      .method_delete(&args.method, &args.url)
+      .method_delete(&args.method, &args.url, String::from("1"))
+      .await
       .unwrap_or_else(|err| {
         eprintln!("{}", err);
         process::exit(1);

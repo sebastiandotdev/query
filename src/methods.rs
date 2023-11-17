@@ -123,17 +123,32 @@ impl Method {
     Ok(())
   }
 
-  pub fn method_delete(
+  pub async fn method_delete(
     &self,
     option: &String,
     endpoint: &String,
+    id: String,
   ) -> Result<(), CustomError> {
     if &self.delete != option {
       let err = CustomError::new("Invalid command see the --help option");
       return Err(err);
     }
-    println!("DELETE");
-    println!("{}", endpoint);
+    let json_config: ReadConfigQuery = ReadConfigQuery::new().unwrap();
+    let json: base_url::ConfigJSON =
+      serde_json::from_str(&json_config.json).unwrap();
+
+    let client = reqwest::Client::new();
+    let res = client
+      .delete(format!("{}/{}/{}", json.base_url, endpoint, id))
+      .send()
+      .await
+      .unwrap_or_else(|err| {
+        eprintln!("{}", err.to_string().red());
+        process::exit(1);
+      });
+    println!("Status: {}", res.status());
+    println!("Message: {}", "deleted succesfully".green());
+    print!("Response server: {}", res.text().await.expect("err"));
     Ok(())
   }
 }
