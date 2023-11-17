@@ -4,27 +4,28 @@ import data from './data.json' assert { type: 'json' }
 const router = new Router()
 
 router
-  .get('/', (context) => {
-    context.response.body = 'Welcome to dinosaur API!'
+  .get('/', (ctx) => {
+    ctx.response.body = 'Welcome to dinosaur API!'
   })
-  .get('/api', (context) => {
-    context.response.body = data
+  .get('/api', (ctx) => {
+    ctx.response.body = data
   })
-  .get('/api/:dinosaur', (context) => {
-    if (context?.params?.dinosaur) {
+  .get('/api/:dinosaur', (ctx) => {
+    if (ctx?.params?.dinosaur) {
       const found = data.find(
-        (item) =>
-          item.name.toLowerCase() === context.params.dinosaur.toLowerCase(),
+        (item) => item.name.toLowerCase() === ctx.params.dinosaur.toLowerCase(),
       )
       if (found) {
-        context.response.body = found
+        ctx.response.body = found
       } else {
-        context.response.body = 'No dinosaurs found.'
+        ctx.response.body = 'No dinosaurs found.'
       }
     }
-  }).post('/api', (context) => {
-    context.response.body = 'Created new dinosaur'
-    console.log(context)
+  }).post('/api', (ctx) => {
+    ctx.response.body = 'Created new dinosaur'
+    console.log(ctx)
+  }).delete('/api/:id', (ctx) => {
+    ctx.response.body = 'Deleted dinosaur'
+    console.log(ctx)
   })
-
 export default router
