@@ -30,7 +30,8 @@ struct Args {
 
 fn example_rust_rover() {
   let example_rust_rover_string = String::from("");
-  println!("{}", example_rust_rover_string)
+  let str_rr = String::new();
+  println!("{} {}" , example_rust_rover_string, str_rr)
 }
 
 #[tokio::main]
