@@ -28,9 +28,15 @@ struct Args {
   url: String,
 }
 
+fn example_rust_rover() {
+  let example_rust_rover_string = String::from("");
+  println!("{}", example_rust_rover_string)
+}
+
 #[tokio::main]
 async fn main() {
   let args = Args::parse();
+  example_rust_rover();
   const COMMAND_CONFIG: &str = "init";
   let methods = methods::Method {
     get: String::from("get"),
