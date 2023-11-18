@@ -31,6 +31,7 @@ struct Args {
 fn example_rust_rover() {
   let example_rust_rover_string = String::from("");
   let str_rr = String::new();
+  // Hi, I'm a comment! with Copilot
   println!("{} {}", example_rust_rover_string, str_rr)
 }
 
