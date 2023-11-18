@@ -1,7 +1,7 @@
 mod base_url;
 mod config;
 /**
- * @copyrigth (c) 2023-present, All rights reserved.
+ * @copyright (c) 2023-present, All rights reserved.
  * @castrogarciajs Main file for the cli.
  * Learning Rust by Building Real Applications
  * https://rustlanges.github.io/rust-book-es/
@@ -31,7 +31,7 @@ struct Args {
 fn example_rust_rover() {
   let example_rust_rover_string = String::from("");
   let str_rr = String::new();
-  println!("{} {}" , example_rust_rover_string, str_rr)
+  println!("{} {}", example_rust_rover_string, str_rr)
 }
 
 #[tokio::main]
