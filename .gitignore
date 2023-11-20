@@ -5,3 +5,5 @@ target/
 
 *.pdb
 .idea
+
+node_modules
