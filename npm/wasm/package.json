@@ -1,0 +1,16 @@
+{
+  "name": "wasm",
+  "version": "0.1.0",
+  "description": "The cross-platform WebAssembly binary for query, a JavaScript bundler.",
+  "repository": "https://github.com/castrogarciajs/query",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "lib/main.js",
+  "browser": "lib/browser.js",
+  "types": "lib/main.d.ts",
+  "directories": {
+    "bin": "bin"
+  }
+}
