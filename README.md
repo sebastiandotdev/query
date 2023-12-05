@@ -7,6 +7,9 @@ seamlessly interact with RESTful APIs from their terminal. Whether you're
 fetching data, posting information, or managing API resources, this CLI tool
 simplifies the process by offering a straightforward and intuitive interface.
 
+> [!NOTE]
+> This project is for practice Rust
+
 ## Key Features
 
 - **Easy Configuration:** Configure the base URL, authentication, and custom
@@ -68,6 +71,9 @@ the Shell installer.
 $ curl -fsSL https://query.dev/install.sh | sh
 Error: unzip is required to install Query (see: https://github.com/castrogarciajs/query#unzip-is-required).
 ```
+
+> [!IMPORTANT]
+> These steps are when installing _query_
 
 **When does this issue occur?**
 
