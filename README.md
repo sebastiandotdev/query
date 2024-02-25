@@ -8,7 +8,7 @@ fetching data, posting information, or managing API resources, this CLI tool
 simplifies the process by offering a straightforward and intuitive interface.
 
 > [!NOTE]
-> This project is for practice Rust
+> This project is for practice Rust 
 
 ## Key Features
 
@@ -87,3 +87,5 @@ You can install unzip via `brew install unzip` on MacOS or
 ## License
 
 This project is LICENSE **MIT**.
+
+I always come back
